@@ -30,7 +30,7 @@ function Update-All {
     Update-Profile
 }
 
-function New-Synmlink ($target, $link) {
+function New-Symlink ($target, $link) {
     New-Item -Path $link -ItemType SymbolicLink -Value $target
 }
 

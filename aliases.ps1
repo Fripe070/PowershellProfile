@@ -6,7 +6,7 @@ Set-Alias -Name ls -Value Get-FancyChildItem -Option AllScope
 Set-Alias -Name which -Value Get-Command
 Set-Alias -Name here -Description "Opens the current directory in explorer" -Value Open-CurrentDir
 Set-Alias -Name refresh -Description "Reloads the environment and profile" -Value Update-All
-Set-Alias -Name symlink -Value New-Synmlink
+Set-Alias -Name symlink -Value New-Symlink
 Set-Alias -Name functions -Description "Returns custom powershell functions" -Value Get-Functions
 Set-Alias -Name funcs -Description "Returns custom powershell functions" -Value Get-Functions
 
