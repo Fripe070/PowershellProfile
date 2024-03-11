@@ -9,6 +9,5 @@ function Get-AudioYTDLP {
 }
 
 function Get-File {
-    param ( $url )
-    curl -O -J $url
+    curl -O -J $args
 }
