@@ -1,5 +1,6 @@
 Set-Alias -Name music-dl -Value Get-AudioYTDLP
 Set-Alias -Name audio-dl -Value Get-AudioYTDLP
+Set-Alias -Name dl -Value Get-File
 
 # System
 Set-Alias -Name ls -Value Get-FancyChildItem -Option AllScope
