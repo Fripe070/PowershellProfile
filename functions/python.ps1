@@ -12,7 +12,7 @@ function Enter-Venv {
 }
 
 function New-Venv {
-    uv venv $args
+    uv venv --seed $args
     Enter-Venv
 }
 

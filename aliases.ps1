@@ -10,6 +10,7 @@ Set-Alias -Name refresh -Description "Reloads the environment and profile" -Valu
 Set-Alias -Name symlink -Value New-Symlink
 Set-Alias -Name functions -Description "Returns custom powershell functions" -Value Get-Functions
 Set-Alias -Name funcs -Description "Returns custom powershell functions" -Value Get-Functions
+Set-Alias -Name c -Value Clear-Host
 
 # Git
 Set-Alias -Name gitc -Description "Alias for 'git clone'" -Value Copy-GitRepo

@@ -3,8 +3,13 @@ function Copy-GitRepo {
 }
 
 function Copy-GitRepoCd {
-    Copy-GitRepo $args
-    Set-Location $URL.Split('/')[-1].Replace('.git', '')
+    param (
+        [string]$url
+    )
+    Copy-GitRepo $url
+    if ($?) {
+        Set-Location $url.Split('/')[-1].Replace('.git', '')
+    }
 }
 
 function Sync-ChildRepos {
