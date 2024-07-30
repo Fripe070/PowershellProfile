@@ -20,4 +20,6 @@ function install-PyRequirements {
     uv pip install -Ur .\requirements.txt 
 }
 
-function Invoke-IPython { py -m IPython $args }
+function Invoke-IPython { 
+    py -m IPython $args
+}

@@ -13,6 +13,8 @@ Set-Alias -Name funcs -Description "Returns custom powershell functions" -Value 
 Set-Alias -Name c -Value Clear-Host
 
 # Git
+Set-Alias -Name gita -Description "Alias for 'git add'" -Value Add-GitChanges
+Set-Alias -Name gits -Description "Alias for 'git status'" -Value Get-GitStatus
 Set-Alias -Name gitc -Description "Alias for 'git clone'" -Value Copy-GitRepo
 Set-Alias -Name gitcd -Description "Clones a git repo and cds into it" -Value Copy-GitRepoCd
 Set-Alias -Name newgit -Description "initiates a new git repo and pushes it to the remote" -Value Add-GitRepo

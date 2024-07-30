@@ -1,3 +1,11 @@
+function Add-GitChanges {
+    git add $args
+}
+
+function Get-GitStatus {
+    git status $args
+}
+
 function Copy-GitRepo {
     git clone $args
 }
