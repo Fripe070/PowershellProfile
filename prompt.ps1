@@ -1,19 +1,29 @@
 $env:VIRTUAL_ENV_DISABLE_PROMPT = 1
 function Prompt {
     $LastWasSuccessCopy = $?
-
-    $identity = [Security.Principal.WindowsIdentity]::GetCurrent()
-    $principal = [Security.Principal.WindowsPrincipal] $identity
-    $adminRole = [Security.Principal.WindowsBuiltInRole]::Administrator
-
+    
+    $added = $false
     if (Test-Path variable:/PSDebugContext) { # Check if debug prompt
-        Write-Host ('[🛠️]') -NoNewLine -ForegroundColor Grey
+        Write-Host ('🛠️') -NoNewLine -ForegroundColor Grey
+        $added = $true
     }
-    if ($principal.IsInRole($adminRole)) { # Check if admin prompt
-        Write-Host ('[⚡]') -NoNewLine -ForegroundColor Yellow
+    $isAdmin = ([Security.Principal.WindowsPrincipal] `
+                [Security.Principal.WindowsIdentity]::GetCurrent() `
+               ).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
+    if ($isAdmin) {
+        Write-Host ('⚡') -NoNewLine -ForegroundColor Yellow
+        $added = $true
+    }
+    $isReadOnly = ((Get-Item (Get-Location)).Attributes -band [System.IO.FileAttributes]::ReadOnly) -eq $true
+    if ($isReadOnly) {
+        Write-Host ('🔒') -NoNewLine -ForegroundColor DarkGray
+        $added = $true
+    }
+    if ($added) {
+        Write-Host " " -NoNewLine
     }
 
-    Write-Host ($(Get-Location)) -NoNewLine -ForegroundColor Blue
+    Write-Host (Get-Location) -NoNewLine -ForegroundColor Blue
     
     $branchName = $(git rev-parse --abbrev-ref HEAD)
     if ($branchName) {
@@ -22,7 +32,10 @@ function Prompt {
     if ($null -ne $env:VIRTUAL_ENV) { 
         Write-Host (" (venv)") -NoNewLine -ForegroundColor Blue
     }
-    Write-Host (" $('$' * ($nestedPromptLevel + 1))") -ForegroundColor (&{If($LastWasSuccessCopy) {"White"} Else {"Red"}}) -NoNewLine
+
+    Write-Host " " -NoNewLine
+    Write-Host ("$" * ($nestedPromptLevel)) -ForegroundColor White -NoNewLine
+    Write-Host "$" -ForegroundColor (&{If($LastWasSuccessCopy) {"White"} Else {"Red"}}) -NoNewLine
 
     return " "
 }
