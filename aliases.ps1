@@ -19,6 +19,7 @@ Set-Alias -Name gitc -Description "Alias for 'git clone'" -Value Copy-GitRepo
 Set-Alias -Name gitcd -Description "Clones a git repo and cds into it" -Value Copy-GitRepoCd
 Set-Alias -Name newgit -Description "initiates a new git repo and pushes it to the remote" -Value Add-GitRepo
 Set-Alias -Name syncall -Description "Runs git pull in all imediate child git repos" -Value Sync-ChildRepos
+Set-Alias -Name pullall -Description "Runs git pull in all imediate child git repos" -Value Sync-ChildRepos
 
 # Python
 Set-Alias -Name ipython -Description "Runs IPython" -Value Invoke-IPython
