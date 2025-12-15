@@ -11,12 +11,15 @@ function Copy-GitRepo {
 }
 
 function Copy-GitRepoCd {
-    param (
-        [string]$url
-    )
-    Copy-GitRepo $url
-    if ($?) {
-        Set-Location $url.Split('/')[-1].Replace('.git', '')
+    Copy-GitRepo $args 2>&1 | Tee-Object -Variable cloneOutput
+    if ($LASTEXITCODE -eq 0) {
+        $repoName = ($cloneOutput | Select-String -Pattern "Cloning into '(.+)'\.\.\." | ForEach-Object { $_.Matches[0].Groups[1].Value })
+        if ($repoName) {
+            Set-Location $repoName
+            Write-Host "Moved into cloned repository $repoName" -ForegroundColor Green
+        } else {
+            Write-Host "Could not determine repository directory from clone output:`n$cloneOutput" -ForegroundColor Yellow
+        }
     }
 }
 
@@ -36,7 +39,7 @@ function Add-GitRepo {
         return
     }
     git init
-    git add .
+    git add -A
     git commit -m "Initial commit"
     git branch -M main
     git remote add origin $REMOTE
